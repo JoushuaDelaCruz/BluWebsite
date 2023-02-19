@@ -1,3 +1,15 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+
+@layer components {
+  .header {
+    @apply fixed inline-flex py-4 justify-between justify-items-center 
+    w-full items-center font-serif text-lg font-bold bg-neutral-50 text-blue-600 
+    shadow-md;
+  }
+  .nav-bar {
+    @apply w-full flex flex-wrap items-center justify-between px-6
+  }
+}
