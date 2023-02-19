@@ -1,5 +1,6 @@
 import React from 'react'
 import Header from './components/Header'
+import Footer from './components/Footer'
 import { BrowserRouter as Router } from 'react-router-dom'
 
 const App = () => {
@@ -12,11 +13,16 @@ const App = () => {
   // }, []);
 
   return (
-    <main className='min-h-screen bg-indigo-200 bg-opacity-25'>
-      <Router>
+    <>
+    <Router>
         <Header />
-      </Router>
+    </Router>
+    <main className='min-h-screen bg-indigo-200 bg-opacity-25'>
     </main>
+    <Router>
+      <Footer />
+    </Router>
+    </>
   )
 }
 
