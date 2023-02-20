@@ -1,23 +1,45 @@
-import React from 'react'
+import React from "react";
+import { FaInstagram, FaFacebook, FaTwitter, FaDiscord } from "react-icons/fa";
 
 const Footer = () => {
-
   const getYear = () => {
     let today = new Date();
     return today.getFullYear();
   };
-
+  /* Still need to do the discord! */
   return (
-    <footer className='flex flex-col justify-center justify-items-center bg-blue-900 text-white py-6 gap-2'>
-        <section className='flex justify-center space-x-3'>
-          <i class="fa-brands fa-instagram fa-2x"></i>
-          <i class="fab fa-facebook fa-2x"></i>
-          <i class="fa-brands fa-twitter fa-2x"></i>
-          <i class="fa-brands fa-discord fa-2x"></i>
-        </section>
-        <p className='text-sm text-center align-middle text-gray-300'>DC Blu &copy; {getYear()} All Rights Reserved</p>
+    <footer className="footer">
+      <section className="footer-body">
+        <a
+          href="https://www.instagram.com/dcblu_creator/"
+          target="_blank"
+          rel="noreferrer"
+        >
+          <FaInstagram size="2.25rem" />
+        </a>
+        <a
+          href="https://www.facebook.com/dcblu"
+          target="_blank"
+          rel="noreferrer"
+        >
+          <FaFacebook size="2.25rem" />
+        </a>
+        <a
+          href="https://twitter.com/dcblu_creator"
+          target="_blank"
+          rel="noreferrer"
+        >
+          <FaTwitter size="2.25rem" />
+        </a>
+        <a href="*">
+          <FaDiscord size="2.25rem" />
+        </a>
+      </section>
+      <p className="footer-copyright">
+        DC Blu &copy; {getYear()} All Rights Reserved
+      </p>
     </footer>
-  )
-}
+  );
+};
 
-export default Footer
+export default Footer;

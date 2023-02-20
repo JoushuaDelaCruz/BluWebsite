@@ -2,7 +2,6 @@
 @tailwind components;
 @tailwind utilities;
 
-
 @layer components {
   .header {
     @apply sticky top-0 inline-flex py-4 justify-between justify-items-center 
@@ -10,6 +9,33 @@
     shadow-md;
   }
   .nav-bar {
-    @apply w-full flex flex-wrap items-center justify-between px-6
+    @apply w-full flex flex-wrap items-center justify-between px-6;
+  }
+  .footer {
+    @apply flex flex-col justify-center justify-items-center bg-blue-900 text-white py-6 gap-2;
+  }
+  .footer-body {
+    @apply flex justify-center space-x-3;
+  }
+  .footer-copyright {
+    @apply text-sm text-center align-middle text-gray-300;
+  }
+  .newsCard-container {
+    @apply flex flex-col bg-slate-50 p-4 rounded-none md:rounded-lg gap-1 font-sans shadow-md
+  }
+  .newsCard-header {
+    @apply font-bold text-xl
+  }
+  .newsCard-date {
+    @apply text-xs text-gray-500
+  }
+  .newsCard-content {
+    @apply pt-6 pb-3
+  }
+  .newsCard-buttons-container {
+    @apply flex flex-row gap-6 font-semibold justify-around text-gray-500 md:justify-start
+  }
+  .newsCard-icon-container {
+    @apply flex flex-row gap-1.5 justify-items-center justify-center items-center cursor-pointer
   }
 }
