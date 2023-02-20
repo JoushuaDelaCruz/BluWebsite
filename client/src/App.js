@@ -1,8 +1,8 @@
 import React from "react";
-import Header from "./components/Header";
-import Footer from "./components/Footer";
-import NewsList from "./components/NewsList";
-import { BrowserRouter as Router } from "react-router-dom";
+import Books from "./components/Books";
+import About from "./components/About";
+import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
+import HomePage from "./components/HomePage";
 
 const App = () => {
   // const [message, SetMessage] = useState("");
@@ -16,13 +16,11 @@ const App = () => {
   return (
     <>
       <Router>
-        <Header />
-      </Router>
-      <main className="min-h-screen bg-indigo-400 bg-opacity-25 py-8 md:p-8">
-        <NewsList />
-      </main>
-      <Router>
-        <Footer />
+        <Routes>
+          <Route path="/" exact element={<HomePage />} />
+          <Route path="/books" exact element={<Books />} />
+          <Route path="/about" exact element={<About />} />
+        </Routes>
       </Router>
     </>
   );
