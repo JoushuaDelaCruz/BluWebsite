@@ -24,13 +24,13 @@
     @apply flex flex-col bg-slate-50 p-4 rounded-none md:rounded-lg gap-1 font-sans shadow-md
   }
   .newsCard-header {
-    @apply font-bold text-xl
+    @apply font-bold text-lg subpixel-antialiased
   }
   .newsCard-date {
     @apply text-xs text-gray-500
   }
   .newsCard-content {
-    @apply pt-6 pb-3
+    @apply pt-6 pb-3 text-base md:text-base subpixel-antialiased leading-relaxed text-left align-middle
   }
   .newsCard-buttons-container {
     @apply flex flex-row gap-6 font-semibold justify-around text-gray-500 md:justify-start
