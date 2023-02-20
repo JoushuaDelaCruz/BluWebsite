@@ -25,9 +25,9 @@ const NewsCard = () => {
 
   return (
     <section className="newsCard-container">
-      <h2 className="newsCard-date">A Few Things Before You Read</h2>
+      <h2 className="newsCard-header">A Few Things Before You Read</h2>
       <span className="newsCard-date">July 22, 2022</span>
-      <p className="newsCard-container">
+      <p className="newsCard-content">
         Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod
         tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim...
       </p>
