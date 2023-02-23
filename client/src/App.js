@@ -1,20 +1,31 @@
-import React from "react";
+import React, { useEffect } from "react";
 import Books from "./components/Books";
 import About from "./components/About";
 import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
 import HomePage from "./components/HomePage";
 
 const App = () => {
-  // const [message, SetMessage] = useState("");
+  function handleCallbackResponse(response) {
+    console.log(response.credential);
+  }
 
-  // useEffect(() => {
-  //   fetch("http://localhost:5000/message")
-  //   .then(res => res.json())
-  //   .then((data) => SetMessage(data.message));
-  // }, []);
+  useEffect(() => {
+    /*global google*/
+    google.accounts.id.initialize({
+      client_id:
+        "616141306078-pl6mggut4lul7liot0ql6jjomof1k8kk.apps.googleusercontent.com",
+      callback: handleCallbackResponse,
+    });
+
+    google.accounts.id.renderButton(document.getElementById("signInDiv"), {
+      theme: "outlie",
+      size: "large",
+    });
+  }, []);
 
   return (
     <>
+      <div id="signInDiv"></div>
       <Router>
         <Routes>
           <Route path="/" exact element={<HomePage />} />
