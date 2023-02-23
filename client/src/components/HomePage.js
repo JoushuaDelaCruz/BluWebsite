@@ -7,9 +7,9 @@ const HomePage = () => {
   return (
     <>
       <Header />
-      <main className="min-h-screen bg-indigo-400 bg-opacity-25 py-8 md:p-8">
+      <div className="py-8 md:p-8">
         <NewsList />
-      </main>
+      </div>
       <Footer />
     </>
   );

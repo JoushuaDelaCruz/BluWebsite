@@ -38,4 +38,8 @@
   .newsCard-icon-container {
     @apply flex flex-row gap-1.5 justify-items-center justify-center items-center cursor-pointer
   }
+
+  .invalid-input {
+    @apply border-red-600
+  }
 }

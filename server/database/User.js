@@ -5,10 +5,14 @@ const createUser = async (newUser) => {
     INSERT INTO reader 
       (username, email_address, password)
       VALUES
-      (?, ?, ?)
+      (:user, :email, :passwordHash)
 	`;
 
-  let params = [newUser.username, newUser.email, newUser.password];
+  let params = {
+    user: newUser.username,
+    email: newUser.email,
+    passwordHash: newUser.password,
+  };
 
   console.log(params);
 
