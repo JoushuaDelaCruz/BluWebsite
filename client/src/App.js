@@ -13,8 +13,6 @@ import Login from "./components/Login";
 import axios from "axios";
 
 const App = () => {
-  const [authenticated, setAuthenticated] = useState(null);
-
   const addUser = async (user) => {
     const res = await fetch("/userSignUp", {
       method: "POST",
@@ -27,7 +25,6 @@ const App = () => {
 
   const logIn = async (user) => {
     await axios.post("/userLogIn", user).then((res) => {
-      setAuthenticated(res.data.authenticated);
       <Navigate to="/" />;
     });
   };
