@@ -14,8 +14,6 @@ const createUser = async (newUser) => {
     passwordHash: newUser.password,
   };
 
-  console.log(params);
-
   try {
     const results = await database.query(createUserSQL, params);
 
@@ -29,4 +27,26 @@ const createUser = async (newUser) => {
   }
 };
 
-module.exports = { createUser };
+const getUser = async (email) => {
+  let getUserSQL = `
+    SELECT * FROM reader WHERE email_address = :email
+  `;
+
+  let params = {
+    email: email,
+  };
+
+  try {
+    const results = await database.query(getUserSQL, params);
+
+    console.log("Successfully retrieved user");
+    console.log(results[0][0]);
+    return results[0][0];
+  } catch (error) {
+    console.log("Error retrieving user");
+    console.log(error);
+    return false;
+  }
+};
+
+module.exports = { createUser, getUser };

@@ -1,14 +1,12 @@
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
+import { Link } from "react-router-dom";
+import withAuthentication from "./withAuthentication";
 
-const SignUp = ({ onAdd }) => {
+const SignUp = ({ onAdd, validInput, invalidInput }) => {
   const [email, setEmail] = useState("");
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
   const [confirmPassword, setConfirmPassword] = useState("");
-  const invalidInput = (idTag) => {
-    document.getElementById(idTag).classList.remove("border-white");
-    document.querySelector(`#${idTag}`).classList.add("invalid-input");
-  };
   const addUser = (e) => {
     e.preventDefault();
     let missingInput = false;
@@ -16,18 +14,26 @@ const SignUp = ({ onAdd }) => {
     if (email === "") {
       invalidInput("email");
       missingInput = true;
+    } else {
+      validInput("email");
     }
     if (username === "") {
       invalidInput("username");
       missingInput = true;
+    } else {
+      validInput("username");
     }
     if (password === "") {
       invalidInput("password");
       missingInput = true;
+    } else {
+      validInput("password");
     }
     if (confirmPassword === "") {
       invalidInput("confirmPassword");
       missingInput = true;
+    } else {
+      validInput("confirmPassword");
     }
 
     if (missingInput) {
@@ -46,18 +52,15 @@ const SignUp = ({ onAdd }) => {
   };
 
   return (
-    <div className="flex flex-col items-center justify-center h-screen">
-      <form
-        className="flex flex-col justify-center items-center bg-slate-50 py-8 px-4 rounded-lg text-center min-w-3/4 md:min-w-1/4 shadow-lg"
-        onSubmit={addUser}
-      >
-        <h1 className="text-4xl font-bold mb-6">Sign Up</h1>
+    <div className="authentication-container">
+      <form className="authentication-form-container" onSubmit={addUser}>
+        <h1 className="authentication-header">Sign Up</h1>
         <input
           type="text"
           placeholder="Enter Email"
           value={email}
           onChange={(e) => setEmail(e.target.value)}
-          className="border w-full outline-none py-2.5 px-6 mb-3 border-solid border-1 border-white rounded-full bg-gray-200 focus:border-blue-500"
+          className="authentication-input"
           id="email"
         />
         <input
@@ -65,7 +68,7 @@ const SignUp = ({ onAdd }) => {
           placeholder="Enter Username"
           value={username}
           onChange={(e) => setUsername(e.target.value)}
-          className="border w-full outline-none py-2.5 px-6 mb-3 border-solid border-1 border-white rounded-full bg-gray-200 focus:border-blue-500"
+          className="authentication-input"
           id="username"
         />
         <input
@@ -73,7 +76,7 @@ const SignUp = ({ onAdd }) => {
           placeholder="Enter Password"
           value={password}
           onChange={(e) => setPassword(e.target.value)}
-          className="w-full outline-none py-2.5 px-6 mb-3 border-solid border-1 border-white rounded-full bg-gray-200 border focus:border-blue-500"
+          className="authentication-input"
           id="password"
         />
         <input
@@ -81,17 +84,22 @@ const SignUp = ({ onAdd }) => {
           placeholder="Re-Enter Password"
           value={confirmPassword}
           onChange={(e) => setConfirmPassword(e.target.value)}
-          className="w-full outline-none py-2.5 px-6 mb-3 border-solid border-1 border-white rounded-full bg-gray-200 border focus:border-blue-500"
+          className="authentication-input"
           id="confirmPassword"
         />
         <input
-          className="text-lg mt-5 mb-2 rounded-full py-2 px-0 border-none outline-none w-1/2 cursor-pointer bg-blue-700 text-white hover:bg-cyan-600 transition duration-500 ease-out"
+          className="authentication-input-submit"
           type="submit"
           value="Sign Up"
         />
         <div>
           <p>
-            Already have an account? <span> Add Login button here! </span>
+            Already have an account?{" "}
+            <span>
+              <Link to="/login" className="authentication-link">
+                Log In
+              </Link>
+            </span>
           </p>
         </div>
       </form>
@@ -99,4 +107,4 @@ const SignUp = ({ onAdd }) => {
   );
 };
 
-export default SignUp;
+export default withAuthentication(SignUp);
