@@ -1,15 +1,45 @@
 import React, { useState } from "react";
 import { Link } from "react-router-dom";
 import withAuthentication from "./withAuthentication";
+import { Navigate } from "react-router-dom";
+import axios from "axios";
 
-const SignUp = ({ onAdd, validInput, invalidInput }) => {
+const SignUp = () => {
   const [email, setEmail] = useState("");
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
   const [confirmPassword, setConfirmPassword] = useState("");
-  const addUser = (e) => {
+
+  const addUserToDatabase = async (user) => {
+    await axios.post("/userSignUp", user).then((response) => {
+      if (response) {
+        <Navigate to="/login" />;
+      } else {
+        alert("Email is not valid");
+      }
+    });
+    const res = await fetch("/userSignUp", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(user),
+    });
+  };
+
+  const addUser = async (e) => {
     e.preventDefault();
     let missingInput = false;
+
+    const invalidInput = (idTag) => {
+      document.getElementById(idTag).classList.remove("valid-input");
+      document.querySelector(`[id="${idTag}"]`).classList.add("invalid-input");
+    };
+
+    const validInput = (idTag) => {
+      document.getElementById(idTag).classList.remove("invalid-input");
+      document.querySelector(`[id="${idTag}"]`).classList.add("valid-input");
+    };
 
     if (email === "") {
       invalidInput("email");
@@ -44,11 +74,20 @@ const SignUp = ({ onAdd, validInput, invalidInput }) => {
       return;
     }
 
-    onAdd({ email: email, username: username, password: password });
+    const success = await addUserToDatabase({
+      email: email,
+      username: username,
+      password: password,
+    });
     setEmail("");
     setPassword("");
     setUsername("");
     setConfirmPassword("");
+    if (success) {
+      return <Navigate to="/login" />;
+    } else {
+      return; // Add error message here
+    }
   };
 
   return (

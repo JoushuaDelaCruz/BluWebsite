@@ -59,19 +59,16 @@ router.post("/userLogIn", async (req, res) => {
     req.session.authenticated = true;
     req.session.reader = user.reader_id;
     req.session.username = user.username;
+    req.session.is_admin = user.is_admin;
     req.session.cookie.maxAge = expireTime;
-    res.send(true);
-  } else {
-    return false;
-  }
-});
-
-router.get("/authenticated", async (req, res) => {
-  if (req.session.authenticated) {
     res.send(true);
   } else {
     res.send(false);
   }
+});
+
+router.get("/authenticated", (req, res) => {
+  res.send(req.session.authenticated);
 });
 
 // app.get("/createUserTable", async (req, res) => {

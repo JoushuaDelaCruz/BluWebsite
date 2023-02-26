@@ -13,50 +13,28 @@ import Login from "./components/Login";
 import axios from "axios";
 
 const App = () => {
-  const addUser = async (user) => {
-    const res = await fetch("/userSignUp", {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify(user),
-    });
-  };
+  const [authenticated, setAuthenticated] = useState(false);
 
-  const logIn = async (user) => {
-    await axios.post("/userLogIn", user).then((res) => {
-      <Navigate to="/" />;
-    });
-  };
-
-  const inputIsInvalid = (idTag) => {
-    document.getElementById(idTag).classList.remove("valid-input");
-    document.querySelector(`#${idTag}`).classList.add("invalid-input");
-  };
-  const inputIsValid = (idTag) => {
-    document.getElementById(idTag).classList.remove("invalid-input");
-    document.querySelector(`#${idTag}`).classList.add("valid-input");
-  };
-
+  useEffect(() => {
+    const fetchData = async () => {
+      const response = await axios.get("/authenticated");
+      setAuthenticated(response.data);
+    };
+    fetchData();
+  }, []);
   return (
     <main className="bg-indigo-400 bg-opacity-25 min-h-screen font-sans">
       <Router>
         <Routes>
-          <Route path="/" exact element={<HomePage />} />
+          <Route
+            path="/"
+            exact
+            element={<HomePage authenticated={authenticated} />}
+          />
           <Route path="/books" exact element={<Books />} />
           <Route path="/about" exact element={<About />} />
-          <Route path="/login" exact element={<Login logInUser={logIn} />} />
-          <Route
-            path="/signup"
-            exact
-            element={
-              <SignUp
-                onAdd={addUser}
-                validInput={inputIsValid}
-                invalidInput={inputIsInvalid}
-              />
-            }
-          />
+          <Route path="/login" exact element={<Login />} />
+          <Route path="/signup" exact element={<SignUp />} />
         </Routes>
       </Router>
     </main>

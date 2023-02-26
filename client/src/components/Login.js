@@ -1,19 +1,57 @@
 import React, { useState } from "react";
 import { Link } from "react-router-dom";
 import withAuthentication from "./withAuthentication";
+import { Navigate } from "react-router-dom";
+import axios from "axios";
 
-const Login = ({ logInUser }) => {
+const Login = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
 
-  const userLogin = (e) => {
+  const checkUserLogin = async (user) => {
+    await axios.post("/userLogIn", user).then((res) => {
+      <Navigate to="/" />;
+    });
+  };
+
+  const invalidInput = (idTag) => {
+    document.getElementById(idTag).classList.remove("valid-input");
+    document.querySelector(`[id="${idTag}"]`).classList.add("invalid-input");
+  };
+
+  const validInput = (idTag) => {
+    document.getElementById(idTag).classList.remove("invalid-input");
+    document.querySelector(`[id="${idTag}"]`).classList.add("valid-input");
+  };
+
+  const userLogin = async (e) => {
     e.preventDefault();
-    if (email === "" || password === "") {
+    let missingInputs = false;
+
+    if (email === "") {
+      missingInputs = true;
+      invalidInput("email");
+    } else {
+      validInput("email");
+    }
+    if (password === "") {
+      missingInputs = true;
+      invalidInput("password");
+    } else {
+      validInput("password");
+    }
+    if (missingInputs) {
       return;
     }
-    logInUser({ email: email, password: password });
+    const success = await checkUserLogin({ email: email, password: password });
     setEmail("");
     setPassword("");
+
+    if (success) {
+      <Navigate to="/homepage" />;
+    } else {
+      return;
+    }
   };
   return (
     <div className="authentication-container">

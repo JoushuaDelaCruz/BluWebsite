@@ -3,10 +3,10 @@ import NewsList from "./NewsList";
 import Header from "./Header";
 import Footer from "./Footer";
 
-const HomePage = () => {
+const HomePage = ({ authenticated }) => {
   return (
     <>
-      <Header />
+      <Header authenticated={authenticated} />
       <div className="py-8 md:p-8">
         <NewsList />
       </div>

@@ -1,7 +1,7 @@
 import React from "react";
 import { Link } from "react-router-dom";
 /* This contains all elements in the header */
-const Header = () => {
+const Header = ({ authenticated }) => {
   return (
     <header className="header">
       <nav className="nav-bar">
@@ -13,10 +13,16 @@ const Header = () => {
           {" "}
           Books{" "}
         </Link>
-        <Link to="/about" className="cursor-pointer">
-          {" "}
-          About{" "}
-        </Link>
+        {authenticated ? (
+          <Link to="/profile" className="cursor-pointer">
+            {" "}
+            Log Out{" "}
+          </Link>
+        ) : (
+          <Link to="/login" className="cursor-pointer">
+            Login
+          </Link>
+        )}
       </nav>
     </header>
   );
