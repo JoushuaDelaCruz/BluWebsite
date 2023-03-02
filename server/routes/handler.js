@@ -11,6 +11,7 @@ const session = require("express-session");
 const database = include("databaseConnection");
 const db_utils = include("database/db_utils");
 const db_users = include("database/User");
+const db_books = include("database/book");
 const success = db_utils.printMySqlVersion();
 
 /* SESSIONS -> MongoDB */
@@ -36,7 +37,9 @@ router.use(
     store: mongoSessionStore,
   })
 );
-
+// --------------------------------------------------- //
+// ---------------- All User Requests ---------------- //
+// --------------------------------------------------- //
 router.post("/userSignUp", async (req, res) => {
   let hashedPassword = bcrypt.hashSync(req.body.password, saltRounds);
   req.body.password = hashedPassword;
@@ -71,15 +74,28 @@ router.get("/authenticated", (req, res) => {
   res.send(req.session.authenticated);
 });
 
-// app.get("/createUserTable", async (req, res) => {
-//     const create_user_table = include("database/create_user_table");
+router.get("/admin", (req, res) => {
+  if (req.session.is_admin == 1) {
+    res.send(true);
+  } else {
+    res.send(false);
+  }
+});
 
-//     var success = create_user_table.createUserTable();
-//     if (success) {
-//       console.log({ message: "User table created successfully" });
-//     } else {
-//       console.log({ message: "User table creation failed" });
-//     }
-//   });
+// --------------------------------------------------- //
+// ---------------- All Book Requests ---------------- //
+// --------------------------------------------------- //
+const multer = require("multer");
+const upload = multer({
+  dest: "/newBook",
+  limits: { fileSize: 5 * 1024 * 1024 }, //5MB
+});
+
+router.post("/newBook", upload.single("image"), (req, res) => {
+  const image = req.file;
+  console.log(image);
+  console.log(req.body);
+  res.send("Whatever");
+});
 
 module.exports = router;

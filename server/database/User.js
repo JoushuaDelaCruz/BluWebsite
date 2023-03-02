@@ -40,7 +40,7 @@ const getUser = async (email) => {
     const results = await database.query(getUserSQL, params);
 
     console.log("Successfully retrieved user");
-    console.log(results[0][0]);
+    console.log(results[0]);
     return results[0][0];
   } catch (error) {
     console.log("Error retrieving user");

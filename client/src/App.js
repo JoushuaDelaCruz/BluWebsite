@@ -10,6 +10,7 @@ import {
 import HomePage from "./components/HomePage";
 import SignUp from "./components/SignUp";
 import Login from "./components/Login";
+import Write from "./components/Write";
 import axios from "axios";
 
 const App = () => {
@@ -34,6 +35,7 @@ const App = () => {
           <Route path="/books" exact element={<Books />} />
           <Route path="/about" exact element={<About />} />
           <Route path="/login" exact element={<Login />} />
+          <Route path="/write" exact element={<Write />} />
           <Route path="/signup" exact element={<SignUp />} />
         </Routes>
       </Router>
